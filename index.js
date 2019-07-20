@@ -12,9 +12,28 @@ fetch(`${baseUrl}/users/2`).then(function(response) {
 document.addEventListener('DOMContentLoaded', function() {
   const input = document.getElementById('name-input');
 
-  input.addEventListener('keyup', function(event) {
+  input.addEventListener('keyup', async function(event) {
     if (event.keyCode === 13) {
-      console.log(input.value);
+      const data = {
+        first_name: input.value
+      }
+      try {
+        let response = await fetch(`${baseUrl}/users`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        });
+
+        if (response.ok) {
+          console.log('OK')
+        } else {
+          console.error('Response failed with status ' + response.status);
+        }
+      } catch(err) {
+        console.error('caught the error', err,)
+      }
     }
   });
 });
