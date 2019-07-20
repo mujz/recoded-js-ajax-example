@@ -6,5 +6,5 @@ fetch(url).then(function(response) {
   const user = json.results[0];
   const userFirstNameH1 = document.getElementById('user-first-name')
 
-  userFirstNameH1.innerText = `${user.first.name} ${user.last.name}`;
+  userFirstNameH1.innerText = `${user.name.first} ${user.name.last}`;
 })
